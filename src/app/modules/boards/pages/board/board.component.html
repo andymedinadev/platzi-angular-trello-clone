@@ -31,6 +31,29 @@
             {{ card.title }}
           </div>
         </div>
+        <div>
+          <app-btn
+            color="light"
+            *ngIf="!list.showCardForm"
+            (click)="openFormCard(list)"
+            >Add Card</app-btn
+          >
+          <div *ngIf="list.showCardForm" class="w-full">
+            <textarea
+              [formControl]="inputCard"
+              class="w-full rounded border-b-2 border-b-gray-400 text-xs"
+              placeholder="Enter a title for this card..."
+            ></textarea>
+            <div class="flex justify-between space-x-2">
+              <app-btn color="success" (click)="createCard(list)"
+                >Add card</app-btn
+              >
+              <app-btn color="light" (click)="closeCardForm(list)"
+                ><fa-icon [icon]="faClose"></fa-icon
+              ></app-btn>
+            </div>
+          </div>
+        </div>
       </div>
       <app-btn color="light" class="shrink-0" (click)="addColumn()"
         >Add Column</app-btn

@@ -66,6 +66,19 @@ Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImlh
 
 ### CARDS
 
+### Create
+POST https://fake-trello-api.herokuapp.com/api/v1/cards
+content-type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc0MzUzMTcxNiwiZXhwIjoxNzQzNTQ5NzE2fQ.02ZoAMlF2EWTUMT-uwo8WRSmM735r6u6CuGaKTFECyc
+
+{
+  "title": "New card",
+  "position": 1,
+  "boardId": 1,
+  "listId": 1
+}
+
+
 ### Update
 PUT https://fake-trello-api.herokuapp.com/api/v1/cards/1
 content-type: application/json

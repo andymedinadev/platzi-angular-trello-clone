@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -7,10 +8,11 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 import { BoardsService } from '@services/boards.service';
 import { CardsService } from '@services/cards.service';
-import { Board, Card } from '@models/index';
+import { Board, Card, List } from '@models/index';
 
 @Component({
   selector: 'app-board',
@@ -28,6 +30,13 @@ import { Board, Card } from '@models/index';
 })
 export class BoardComponent implements OnInit {
   board: Board | null = null;
+
+  faClose = faClose;
+
+  inputCard = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
 
   constructor(
     private dialog: Dialog,
@@ -105,5 +114,37 @@ export class BoardComponent implements OnInit {
     dialogRef.closed.subscribe((output) => {
       console.log(output);
     });
+  }
+
+  createCard(list: List) {
+    const title = this.inputCard.value;
+
+    if (this.board) {
+      this.cardsService
+        .create({
+          title,
+          listId: list.id,
+          boardId: this.board.id,
+          position: this.boardsService.getPositionNewCard(list.cards),
+        })
+        .subscribe((card) => {
+          list.cards.push(card);
+          this.inputCard.setValue('');
+          list.showCardForm = false;
+        });
+    }
+  }
+
+  openFormCard(list: List) {
+    if (this.board?.lists) {
+      this.board.lists = this.board.lists.map((iteratorList) => ({
+        ...iteratorList,
+        showCardForm: iteratorList.id === list.id,
+      }));
+    }
+  }
+
+  closeCardForm(list: List) {
+    list.showCardForm = false;
   }
 }
