@@ -17,6 +17,7 @@
 
         <div
           class="mt-2 min-h-[2.5rem] text-sm"
+          [id]="list.id"
           cdkDropList
           (cdkDropListDropped)="drop($event)"
           [cdkDropListData]="list.cards"

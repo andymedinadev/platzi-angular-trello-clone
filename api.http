@@ -62,3 +62,15 @@ GET https://fake-trello-api.herokuapp.com/api/v1/users/
 content-type: application/json
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImlhdCI6MTc0MjQ5MzAxOCwiZXhwIjoxNzQyNTExMDE4fQ.yqzf5LZpVUQI_wbWCVL9VZPewo-gko7Cfz--UoJnAbw
 
+
+
+### CARDS
+
+### Update
+PUT https://fake-trello-api.herokuapp.com/api/v1/cards/1
+content-type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc0MzUzMTcxNiwiZXhwIjoxNzQzNTQ5NzE2fQ.02ZoAMlF2EWTUMT-uwo8WRSmM735r6u6CuGaKTFECyc
+
+{
+  "position": 65535
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -7,8 +8,8 @@ import {
 import { Dialog } from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component';
 
-import { ActivatedRoute } from '@angular/router';
 import { BoardsService } from '@services/boards.service';
+import { CardsService } from '@services/cards.service';
 import { Board, Card } from '@models/index';
 
 @Component({
@@ -32,6 +33,7 @@ export class BoardComponent implements OnInit {
     private dialog: Dialog,
     private route: ActivatedRoute,
     private boardsService: BoardsService,
+    private cardsService: CardsService,
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,12 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  private updateCard(card: Card, position: number, listId: string | number) {
+    this.cardsService
+      .update(card.id, { position, listId })
+      .subscribe((cardUpdated) => console.log(cardUpdated));
+  }
+
   drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -65,6 +73,18 @@ export class BoardComponent implements OnInit {
         event.currentIndex,
       );
     }
+
+    // calculations after drop
+    const cardPosition = this.boardsService.getPosition(
+      event.container.data,
+      event.currentIndex,
+    );
+
+    const card = event.container.data[event.currentIndex];
+
+    const listId = event.container.id;
+
+    this.updateCard(card, cardPosition, listId);
   }
 
   addColumn() {

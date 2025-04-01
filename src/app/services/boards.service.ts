@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
-import { Board } from '@models/index';
+import { Board, Card } from '@models/index';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,36 @@ export class BoardsService {
     return this.http.get<Board>(`${this.apiUrl}/api/v1/boards/${id}`, {
       context: checkToken(),
     });
+  }
+
+  bufferSpace = 65535;
+
+  getPosition(cards: Card[], currentIndex: number) {
+    // new item
+    if (cards.length === 1) {
+      return this.bufferSpace;
+    }
+
+    // top item
+    if (cards.length > 1 && currentIndex === 0) {
+      const prevTopPosition = cards[1].position;
+      return prevTopPosition / 2;
+    }
+
+    // middle item
+    const lastIndex = cards.length - 1;
+    if (cards.length > 2 && currentIndex > 0 && currentIndex < lastIndex) {
+      const prevPosition = cards[currentIndex - 1].position;
+      const nextPosition = cards[currentIndex + 1].position;
+      return (prevPosition + nextPosition) / 2;
+    }
+
+    // bottom item
+    if (cards.length > 1 && currentIndex === lastIndex) {
+      const prevBottomPosition = cards[lastIndex - 1].position;
+      return prevBottomPosition + this.bufferSpace;
+    }
+
+    return 0;
   }
 }
