@@ -31,7 +31,17 @@
               >
             </li>
             <li>
-              <app-btn typeBtn="button" color="sky">Create</app-btn>
+              <app-btn
+                typeBtn="button"
+                color="sky"
+                (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+                cdkOverlayOrigin
+                #createBoardOverlay="cdkOverlayOrigin"
+              >
+                <div class="flex space-x-2 text-left">
+                  <span>Create</span>
+                  <fa-icon [icon]="faAngleDown"></fa-icon></div
+              ></app-btn>
             </li>
           </ul>
         </div>
@@ -148,6 +158,32 @@
         </button>
       </div>
       <div class="flex justify-between py-3 px-4">Content</div>
+    </div>
+  </ng-template>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="createBoardOverlay"
+    [cdkConnectedOverlayOpen]="isOpenOverlayCreateBoard"
+    (overlayOutsideClick)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+  >
+    <div
+      class="z-50 my-4 w-60 list-none divide-y divide-gray-100 rounded bg-white text-base shadow"
+    >
+      <div class="relative py-2 px-4 text-center">
+        <span class="text-normal block text-gray-900">Create new Board</span>
+        <button
+          (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+          class="absolute right-3 top-3 block text-sm text-gray-900"
+        >
+          <fa-icon [icon]="faClose"></fa-icon>
+        </button>
+      </div>
+      <div class="flex justify-between py-3 px-4">
+        <app-board-form
+          (closeOverlay)="closeBoardOverlay($event)"
+        ></app-board-form>
+      </div>
     </div>
   </ng-template>
 </ng-container>

@@ -1,0 +1,34 @@
+<form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doSave()">
+  <div>
+    <div class="relative">
+      <input
+        formControlName="title"
+        placeholder="Enter title"
+        type="text"
+        class="w-full rounded border-2 border-gray-300 bg-gray-100"
+      />
+    </div>
+  </div>
+  <div class="flex">
+    <div *ngFor="let color of colors">
+      <input
+        [id]="color + '-radio'"
+        type="radio"
+        [value]="color"
+        name="backgroundColor"
+        formControlName="backgroundColor"
+        class="peer hidden"
+      />
+      <label
+        [for]="color + '-radio'"
+        class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded border border-gray-200 text-transparent peer-checked:text-white"
+        [ngClass]="'bg-' + color + '-700 hover:bg-' + color + '-500'"
+      >
+        <fa-icon [icon]="faCheck"></fa-icon>
+      </label>
+    </div>
+  </div>
+  <div>
+    <app-btn typeBtn="submit" color="success">Create</app-btn>
+  </div>
+</form>

@@ -74,3 +74,17 @@ Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlh
 {
   "position": 65535
 }
+
+
+
+### BOARDS
+
+### Create
+POST https://fake-trello-api.herokuapp.com/api/v1/boards/
+content-type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc0MzUzMTcxNiwiZXhwIjoxNzQzNTQ5NzE2fQ.02ZoAMlF2EWTUMT-uwo8WRSmM735r6u6CuGaKTFECyc
+
+{
+  "title": "new board",
+  "backgroundColor": "green"
+}
