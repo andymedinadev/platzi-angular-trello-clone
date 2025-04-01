@@ -8,18 +8,14 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-
 @NgModule({
-  declarations: [
-    LayoutComponent,
-    NavbarComponent
-  ],
+  declarations: [LayoutComponent, NavbarComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     OverlayModule,
     FontAwesomeModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class LayoutModule { }
+export class LayoutModule {}

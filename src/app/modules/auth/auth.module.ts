@@ -17,7 +17,6 @@ import { ForgotPasswordFormComponent } from './components/forgot-password-form/f
 import { RecoveryFormComponent } from './components/recovery-form/recovery-form.component';
 import { BackgroundComponent } from './components/background/background.component';
 
-
 @NgModule({
   declarations: [
     LoginComponent,
@@ -30,14 +29,14 @@ import { BackgroundComponent } from './components/background/background.componen
     ForgotPasswordFormComponent,
     BackgroundComponent,
     RecoveryComponent,
-    RecoveryFormComponent
+    RecoveryFormComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    FontAwesomeModule
-  ]
+    FontAwesomeModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

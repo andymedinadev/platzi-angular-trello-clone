@@ -7,16 +7,16 @@ import { BoardComponent } from './pages/board/board.component';
 const routes: Routes = [
   {
     path: '',
-    component: BoardsComponent
+    component: BoardsComponent,
   },
   {
     path: ':boardId',
-    component: BoardComponent
+    component: BoardComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BoardsRoutingModule { }
+export class BoardsRoutingModule {}

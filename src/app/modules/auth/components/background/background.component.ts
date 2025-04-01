@@ -5,10 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './background.component.html',
 })
 export class BackgroundComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

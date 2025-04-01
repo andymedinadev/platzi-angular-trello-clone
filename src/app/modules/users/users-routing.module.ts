@@ -6,12 +6,12 @@ import { UsersTableComponent } from './pages/users-table/users-table.component';
 const routes: Routes = [
   {
     path: '',
-    component: UsersTableComponent
-  }
+    component: UsersTableComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UsersRoutingModule { }
+export class UsersRoutingModule {}

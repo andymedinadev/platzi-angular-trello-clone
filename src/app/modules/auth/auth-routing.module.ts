@@ -11,36 +11,36 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
     canActivate: [redirectGuard],
     component: LoginComponent,
-    title: 'Login'
+    title: 'Login',
   },
   {
     path: 'forgot-password',
     canActivate: [redirectGuard],
     component: ForgotPasswordComponent,
-    title: 'Forgot Password'
+    title: 'Forgot Password',
   },
   {
     path: 'register',
     canActivate: [redirectGuard],
     component: RegisterComponent,
-    title: 'Register'
+    title: 'Register',
   },
   {
     path: 'recovery',
     canActivate: [redirectGuard],
     component: RecoveryComponent,
-    title: 'Recovery'
-  }
+    title: 'Recovery',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}
