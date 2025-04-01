@@ -1,5 +1,4 @@
-import { Color } from './color.model';
-import { User } from './user.model';
+import { Color, User } from './index';
 
 export interface Board {
   id: string;

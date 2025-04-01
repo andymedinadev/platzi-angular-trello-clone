@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPen, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthService } from '@services/auth.service';
-import { RequestStatus } from '@models/request-status.model';
+import { RequestStatus } from '@models/index';
 
 @Component({
   selector: 'app-login-form',

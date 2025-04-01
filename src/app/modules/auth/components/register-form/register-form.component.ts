@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { CustomValidators } from '@utils/validators';
-import { RequestStatus } from '@models/request-status.model';
+import { RequestStatus } from '@models/index';
 import { AuthService } from '@services/auth.service';
 
 @Component({

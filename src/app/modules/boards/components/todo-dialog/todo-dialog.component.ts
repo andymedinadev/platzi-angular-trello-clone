@@ -9,7 +9,7 @@ import {
   faCheckSquare,
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
-import { ToDo } from '@models/todo.model';
+import { ToDo } from '@models/index';
 
 interface InputData {
   todo: ToDo;
@@ -36,7 +36,7 @@ export class TodoDialogComponent {
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
-    @Inject(DIALOG_DATA) data: InputData
+    @Inject(DIALOG_DATA) data: InputData,
   ) {
     this.todo = data.todo;
   }

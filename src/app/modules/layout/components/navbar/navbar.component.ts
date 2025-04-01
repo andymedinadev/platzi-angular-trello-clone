@@ -7,7 +7,6 @@ import {
   faAngleDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
-import { User } from '@models/user.model';
 
 @Component({
   selector: 'app-navbar',

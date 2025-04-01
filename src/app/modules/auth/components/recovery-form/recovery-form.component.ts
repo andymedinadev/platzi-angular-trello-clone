@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
-import { RequestStatus } from '@models/request-status.model';
+import { RequestStatus } from '@models/index';
 
 import { CustomValidators } from '@utils/validators';
 import { ActivatedRoute, Router } from '@angular/router';

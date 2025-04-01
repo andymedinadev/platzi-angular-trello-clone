@@ -4,8 +4,7 @@ import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { environment } from '@environments/environment';
 import { TokenService } from '@services/token.service';
 import { checkToken } from '@interceptors/token.interceptor';
-import { ResponseLogin } from '@models/auth.model';
-import { User } from '@models/user.model';
+import { ResponseLogin, User } from '@models/index';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Color, COLORS } from '@models/color.model';
+import { Color, COLORS } from '@models/index';
 
 @Component({
   selector: 'app-btn',

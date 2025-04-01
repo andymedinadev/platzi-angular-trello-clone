@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Color, COLORS } from '@models/color.model';
+import { Color, COLORS } from '@models/index';
 
 @Component({
   selector: 'card-color',

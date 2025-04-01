@@ -12,7 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
 import { MeService } from '@services/me.service';
-import { Board } from '@models/board.model';
+import { Board } from '@models/index';
 
 @Component({
   selector: 'app-boards',
