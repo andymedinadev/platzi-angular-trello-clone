@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -7,7 +7,9 @@ import {
 import { Dialog } from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component';
 
-import { ToDo, Column } from '@models/index';
+import { ActivatedRoute } from '@angular/router';
+import { BoardsService } from '@services/boards.service';
+import { Board, Card } from '@models/index';
 
 @Component({
   selector: 'app-board',
@@ -23,48 +25,32 @@ import { ToDo, Column } from '@models/index';
     `,
   ],
 })
-export class BoardComponent {
-  columns: Column[] = [
-    {
-      title: 'ToDo',
-      todos: [
-        {
-          id: '1',
-          title: 'Make dishes',
-        },
-        {
-          id: '2',
-          title: 'Buy a unicorn',
-        },
-      ],
-    },
-    {
-      title: 'Doing',
-      todos: [
-        {
-          id: '3',
-          title: 'Watch Angular Path in Platzi',
-        },
-      ],
-    },
-    {
-      title: 'Done',
-      todos: [
-        {
-          id: '4',
-          title: 'Play video games',
-        },
-      ],
-    },
-  ];
+export class BoardComponent implements OnInit {
+  board: Board | null = null;
 
-  todos: ToDo[] = [];
-  doing: ToDo[] = [];
-  done: ToDo[] = [];
+  constructor(
+    private dialog: Dialog,
+    private route: ActivatedRoute,
+    private boardsService: BoardsService,
+  ) {}
 
-  constructor(private dialog: Dialog) {}
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('boardId');
 
-  drop(event: CdkDragDrop<ToDo[]>) {
+      if (id) {
+        this.getBoard(id);
+      }
+    });
+  }
+
+  private getBoard(id: Board['id']) {
+    this.boardsService.getBoard(id).subscribe((board) => {
+      this.board = board;
+    });
+  }
+
+  drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -82,18 +68,18 @@ export class BoardComponent {
   }
 
   addColumn() {
-    this.columns.push({
-      title: 'New Column',
-      todos: [],
-    });
+    // this.columns.push({
+    //   title: 'New Column',
+    //   todos: [],
+    // });
   }
 
-  openDialog(todo: ToDo) {
+  openDialog(card: Card) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       data: {
-        todo: todo,
+        card: card,
       },
     });
     dialogRef.closed.subscribe((output) => {
