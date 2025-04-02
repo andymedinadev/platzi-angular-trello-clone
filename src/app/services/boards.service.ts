@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
 import { Board, Card, Color } from '@models/index';
@@ -9,6 +10,10 @@ import { Board, Card, Color } from '@models/index';
 })
 export class BoardsService {
   apiUrl = environment.API_URL;
+
+  bufferSpace = 65535;
+
+  backgroundColor$ = new BehaviorSubject<Color>('sky');
 
   constructor(private http: HttpClient) {}
 
@@ -25,8 +30,6 @@ export class BoardsService {
       context: checkToken(),
     });
   }
-
-  bufferSpace = 65535;
 
   getPosition(cards: Card[], currentIndex: number) {
     // new item
@@ -65,5 +68,9 @@ export class BoardsService {
     const lastIndex = cards.length - 1;
     const prevBottomPosition = cards[lastIndex].position;
     return prevBottomPosition + this.bufferSpace;
+  }
+
+  setBackgroundColor(color: Color) {
+    this.backgroundColor$.next(color);
   }
 }

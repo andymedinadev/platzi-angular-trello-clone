@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import {
@@ -13,7 +13,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { BoardsService } from '@services/boards.service';
 import { CardsService } from '@services/cards.service';
 import { ListsService } from '@services/lists.service';
-import { Board, Card, List } from '@models/index';
+import { BACKGROUNDS, Board, Card, List } from '@models/index';
 
 @Component({
   selector: 'app-board',
@@ -29,7 +29,7 @@ import { Board, Card, List } from '@models/index';
     `,
   ],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   board: Board | null = null;
 
   showListForm = false;
@@ -45,6 +45,8 @@ export class BoardComponent implements OnInit {
     nonNullable: true,
     validators: [Validators.required],
   });
+
+  colorBackgrounds = BACKGROUNDS;
 
   constructor(
     private dialog: Dialog,
@@ -64,9 +66,14 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.boardsService.setBackgroundColor('sky');
+  }
+
   private getBoard(id: Board['id']) {
     this.boardsService.getBoard(id).subscribe((board) => {
       this.board = board;
+      this.boardsService.setBackgroundColor(this.board.backgroundColor);
     });
   }
 
@@ -169,5 +176,13 @@ export class BoardComponent implements OnInit {
 
   closeCardForm(list: List) {
     list.showCardForm = false;
+  }
+
+  get colors() {
+    if (this.board) {
+      const classes = this.colorBackgrounds[this.board.backgroundColor];
+      return classes ? classes : {};
+    }
+    return {};
   }
 }
