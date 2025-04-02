@@ -12,6 +12,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 import { BoardsService } from '@services/boards.service';
 import { CardsService } from '@services/cards.service';
+import { ListsService } from '@services/lists.service';
 import { Board, Card, List } from '@models/index';
 
 @Component({
@@ -31,9 +32,16 @@ import { Board, Card, List } from '@models/index';
 export class BoardComponent implements OnInit {
   board: Board | null = null;
 
+  showListForm = false;
+
   faClose = faClose;
 
   inputCard = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  inputList = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
   });
@@ -43,6 +51,7 @@ export class BoardComponent implements OnInit {
     private route: ActivatedRoute,
     private boardsService: BoardsService,
     private cardsService: CardsService,
+    private listsService: ListsService,
   ) {}
 
   ngOnInit() {
@@ -96,11 +105,25 @@ export class BoardComponent implements OnInit {
     this.updateCard(card, cardPosition, listId);
   }
 
-  addColumn() {
-    // this.columns.push({
-    //   title: 'New Column',
-    //   todos: [],
-    // });
+  addList() {
+    const title = this.inputList.value;
+
+    if (this.board) {
+      this.listsService
+        .create({
+          title,
+          boardId: this.board.id,
+          position: this.listsService.getPositionNewList(this.board.lists),
+        })
+        .subscribe((list) => {
+          this.board?.lists.push({
+            ...list,
+            cards: [],
+          });
+          this.showListForm = false;
+          this.inputList.setValue('');
+        });
+    }
   }
 
   openDialog(card: Card) {

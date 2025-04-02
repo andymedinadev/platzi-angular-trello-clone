@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
-import { Board, Card, CreateCardDto, UpdateCardDto } from '@models/index';
+import { Card, CreateCardDto, UpdateCardDto } from '@models/index';
 
 @Injectable({
   providedIn: 'root',
